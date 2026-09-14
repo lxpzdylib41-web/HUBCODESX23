@@ -89,6 +89,32 @@ function modEmbed(title: string, color: number) {
   return new EmbedBuilder().setTitle(title).setColor(color).setTimestamp();
 }
 
+function isExpiredInteractionError(err: unknown): boolean {
+  const error = err as { code?: number; rawError?: { code?: number } };
+  return error?.code === 10062 || error?.rawError?.code === 10062;
+}
+
+async function handleInteractionError(interaction: ChatInputCommandInteraction, err: unknown) {
+  if (isExpiredInteractionError(err)) {
+    console.warn(`[discord] Interacción vencida ignorada: ${interaction.commandName}`);
+    return;
+  }
+
+  console.error("Error en comando:", err);
+  try {
+    const embed = { embeds: [errEmbed("Error inesperado", "Intenta de nuevo.")] };
+    if (interaction.deferred || interaction.replied) {
+      await interaction.editReply(embed);
+    } else {
+      await interaction.reply(embed);
+    }
+  } catch (replyError) {
+    if (!isExpiredInteractionError(replyError)) {
+      console.error("No se pudo enviar el mensaje de error:", replyError);
+    }
+  }
+}
+
 // ── Formatting ────────────────────────────────────────────────
 function formatMinutes(min: number | null | undefined): string {
   if (!min) return "Permanente ♾️";
@@ -845,11 +871,12 @@ client.once(Events.ClientReady, c => {
 
 client.on(Events.InteractionCreate, async interaction => {
   if (!interaction.isChatInputCommand()) return;
-  if (allowedGuildId && interaction.guildId !== allowedGuildId) {
-    await interaction.reply({ content: "❌ Este bot no está autorizado en este servidor.", flags: 64 });
-    return;
-  }
   try {
+    if (allowedGuildId && interaction.guildId !== allowedGuildId) {
+      await interaction.reply({ content: "❌ Este bot no está autorizado en este servidor.", flags: 64 });
+      return;
+    }
+
     switch (interaction.commandName) {
       // Keys
       case "genkey":           await handleGenkey(interaction);           break;
@@ -919,9 +946,7 @@ client.on(Events.InteractionCreate, async interaction => {
       case "loop":             await handleLoop(interaction);             break;
     }
   } catch (err) {
-    console.error("Error en comando:", err);
-    const m = interaction.deferred ? "editReply" : "reply";
-    await interaction[m]({ embeds: [errEmbed("Error inesperado","Intenta de nuevo.")] });
+    await handleInteractionError(interaction, err);
   }
 });
 

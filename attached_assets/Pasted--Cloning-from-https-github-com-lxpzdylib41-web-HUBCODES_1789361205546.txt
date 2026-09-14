@@ -1,0 +1,126 @@
+==> Cloning from https://github.com/lxpzdylib41-web/HUBCODESX23
+==> Checking out commit d86daafe46b33dfe8417cc0202c2780b64c9941e in branch main
+==> Using Ruby version 3.4.4 (default)
+==> Docs on specifying a Ruby version: https://render.com/docs/ruby-version
+==> Using Ruby version 3.4.4 (default)
+==> Docs on specifying a Ruby version: https://render.com/docs/ruby-version
+==> Running build command 'pnpm install --frozen-lockfile && pnpm run build:production'...
+==> Using Node.js version 24.14.1 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+> workspace@0.0.0 build:production /opt/render/project/src
+> pnpm --filter @workspace/api-server run build && pnpm --filter @workspace/discord-bot run build
+> @workspace/api-server@0.0.0 build /opt/render/project/src/artifacts/api-server
+> node ./build.mjs
+  dist/index.mjs                       2.2mb ⚠️
+  dist/pino-worker.mjs               153.4kb
+  dist/pino-file.mjs                 142.1kb
+  dist/pino-pretty.mjs               114.6kb
+  dist/thread-stream-worker.mjs        7.3kb
+  dist/index.mjs.map                   3.8mb
+  dist/pino-worker.mjs.map           256.9kb
+  dist/pino-file.mjs.map             229.0kb
+  dist/pino-pretty.mjs.map           204.0kb
+  dist/thread-stream-worker.mjs.map   12.0kb
+⚡ Done in 484ms
+> @workspace/discord-bot@0.0.0 build /opt/render/project/src/artifacts/discord-bot
+> node ./build.mjs
+  dist/index.mjs      3.3mb ⚠️
+  dist/index.mjs.map  5.3mb
+⚡ Done in 575ms
+==> Uploading build...
+==> Uploaded in 3.0s. Compression took 3.1s
+==> Build successful 🎉
+==> Deploying...
+==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+==> Running 'node artifacts/api-server/prod-launcher.mjs'
+{"level":30,"time":1789361078416,"pid":87,"hostname":"srv-dajna99594qs73cs7ktg-hibernate-754b59b546-2pksv","port":10000,"msg":"Server listening"}
+{"level":30,"time":1789361078823,"pid":87,"hostname":"srv-dajna99594qs73cs7ktg-hibernate-754b59b546-2pksv","req":{"id":1,"method":"HEAD","url":"/"},"res":{"statusCode":200},"responseTime":6,"msg":"request completed"}
+✅ Bot conectado como COOKIEX23#1864
+🔒 Bloqueado al servidor: 1524506931165659239
+[runtime-control] Heartbeat del bot activo.
+==> Your service is live 🎉
+==> 
+==> ///////////////////////////////////////////////////////////
+==> 
+==> Available at your primary URL https://hubcodesx23.onrender.com
+==> 
+==> ///////////////////////////////////////////////////////////
+{"level":30,"time":1789361082235,"pid":87,"hostname":"srv-dajna99594qs73cs7ktg-hibernate-754b59b546-2pksv","req":{"id":2,"method":"GET","url":"/api/healthz"},"res":{"statusCode":200},"responseTime":5,"msg":"request completed"}
+{"level":30,"time":1789361082241,"pid":87,"hostname":"srv-dajna99594qs73cs7ktg-hibernate-754b59b546-2pksv","req":{"id":3,"method":"GET","url":"/api/healthz"},"res":{"statusCode":200},"responseTime":4,"msg":"request completed"}
+{"level":30,"time":1789361082868,"pid":87,"hostname":"srv-dajna99594qs73cs7ktg-hibernate-754b59b546-2pksv","req":{"id":4,"method":"GET","url":"/"},"res":{"statusCode":200},"responseTime":1,"msg":"request completed"}
+{"level":30,"time":1789361087240,"pid":87,"hostname":"srv-dajna99594qs73cs7ktg-hibernate-754b59b546-2pksv","req":{"id":5,"method":"GET","url":"/api/healthz"},"res":{"statusCode":200},"responseTime":1,"msg":"request completed"}
+{"level":30,"time":1789361092239,"pid":87,"hostname":"srv-dajna99594qs73cs7ktg-hibernate-754b59b546-2pksv","req":{"id":6,"method":"GET","url":"/api/healthz"},"res":{"statusCode":200},"responseTime":1,"msg":"request completed"}
+{"level":30,"time":1789361097238,"pid":87,"hostname":"srv-dajna99594qs73cs7ktg-hibernate-754b59b546-2pksv","req":{"id":7,"method":"GET","url":"/api/healthz"},"res":{"statusCode":200},"responseTime":0,"msg":"request completed"}
+Error en comando: DiscordAPIError[10062]: Unknown interaction
+    at handleErrors (file:///opt/render/project/src/artifacts/discord-bot/dist/index.mjs:28576:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async BurstHandler.runRequest (file:///opt/render/project/src/artifacts/discord-bot/dist/index.mjs:28678:27)
+    at async _REST.request (file:///opt/render/project/src/artifacts/discord-bot/dist/index.mjs:29140:26)
+    at async ChatInputCommandInteraction5.deferReply (file:///opt/render/project/src/artifacts/discord-bot/dist/index.mjs:57944:26)
+    at async handleListkeys (file:///opt/render/project/src/artifacts/discord-bot/dist/index.mjs:82861:3)
+    at async Client.<anonymous> (file:///opt/render/project/src/artifacts/discord-bot/dist/index.mjs:83480:9) {
+  requestBody: { files: undefined, json: { type: 5, data: [Object] } },
+  rawError: { message: 'Unknown interaction', code: 10062 },
+  code: 10062,
+  status: 404,
+  method: 'POST',
+  url: 'https://discord.com/api/v10/interactions/1548917463008419860/aW50ZXJhY3Rpb246MTU0ODkxNzQ2MzAwODQxOTg2MDp3RVBWUWhnZXpFb3lGdGFIUU53dVJJdHFLdUt3eWpSakNnbEhxM0NOdUVuM21pSjVDaVI0SUVVbDVsaG96bjRDeUNrMFBUbGlyQmtIc0N6VFJGTXBZVVhZa29WS3B3Tk0zQ3RXbE5sdTBvRjFsSE9EUkJsMzUydnhHZ2E0ZGY2bw/callback?with_response=false'
+}
+node:events:486
+      throw er; // Unhandled 'error' event
+      ^
+DiscordAPIError[10062]: Unknown interaction
+    at handleErrors (file:///opt/render/project/src/artifacts/discord-bot/dist/index.mjs:28576:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async BurstHandler.runRequest (file:///opt/render/project/src/artifacts/discord-bot/dist/index.mjs:28678:27)
+    at async _REST.request (file:///opt/render/project/src/artifacts/discord-bot/dist/index.mjs:29140:26)
+    at async ChatInputCommandInteraction5.reply (file:///opt/render/project/src/artifacts/discord-bot/dist/index.mjs:58001:26)
+    at async Client.<anonymous> (file:///opt/render/project/src/artifacts/discord-bot/dist/index.mjs:83653:5)
+Emitted 'error' event on Client instance at:
+    at emitUnhandledRejectionOrErr (node:events:391:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:92:21) {
+  requestBody: {
+    files: [],
+    json: {
+      type: 4,
+      data: {
+        content: undefined,
+        tts: false,
+        nonce: undefined,
+        enforce_nonce: false,
+        embeds: [
+          {
+            title: '❌ Error inesperado',
+            description: 'Intenta de nuevo.',
+            color: 16729156
+          }
+        ],
+        components: undefined,
+        username: undefined,
+        avatar_url: undefined,
+        allowed_mentions: undefined,
+        flags: undefined,
+        message_reference: undefined,
+        attachments: undefined,
+        sticker_ids: undefined,
+        thread_name: undefined,
+        applied_tags: undefined,
+        poll: undefined
+      }
+    }
+  },
+  rawError: { message: 'Unknown interaction', code: 10062 },
+  code: 10062,
+  status: 404,
+  method: 'POST',
+  url: 'https://discord.com/api/v10/interactions/1548917463008419860/aW50ZXJhY3Rpb246MTU0ODkxNzQ2MzAwODQxOTg2MDp3RVBWUWhnZXpFb3lGdGFIUU53dVJJdHFLdUt3eWpSakNnbEhxM0NOdUVuM21pSjVDaVI0SUVVbDVsaG96bjRDeUNrMFBUbGlyQmtIc0N6VFJGTXBZVVhZa29WS3B3Tk0zQ3RXbE5sdTBvRjFsSE9EUkJsMzUydnhHZ2E0ZGY2bw/callback?with_response=false'
+}
+Node.js v24.14.1
+[prod-launcher] discord-bot exited (code=1 signal=null)
+==> Running 'node artifacts/api-server/prod-launcher.mjs'
+{"level":30,"time":1789361110894,"pid":69,"hostname":"srv-dajna99594qs73cs7ktg-hibernate-754b59b546-2pksv","port":10000,"msg":"Server listening"}
+{"level":30,"time":1789361112391,"pid":69,"hostname":"srv-dajna99594qs73cs7ktg-hibernate-754b59b546-2pksv","req":{"id":1,"method":"GET","url":"/api/healthz"},"res":{"statusCode":200},"responseTime":100,"msg":"request completed"}
+{"level":30,"time":1789361113037,"pid":69,"hostname":"srv-dajna99594qs73cs7ktg-hibernate-754b59b546-2pksv","req":{"id":2,"method":"GET","url":"/api/healthz"},"res":{"statusCode":200},"responseTime":0,"msg":"request completed"}
+✅ Bot conectado como COOKIEX23#1864
+🔒 Bloqueado al servidor: 1524506931165659239
+[runtime-control] Heartbeat del bot activo.

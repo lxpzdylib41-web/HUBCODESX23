@@ -424,6 +424,17 @@ Comprueba que:
 
 El ZIP no contiene la base de datos. Debes usar la misma PostgreSQL o crear las keys nuevamente desde Discord.
 
+### `DiscordAPIError: Unknown interaction`
+
+Este mensaje significa que Discord recibió una interacción demasiado tarde o que esa interacción ya había vencido. No significa que el Build de Render haya fallado.
+
+La versión actual ignora de forma segura esa interacción para que el proceso del bot no se cierre. Si aparece después de subir una actualización:
+
+1. Confirma que Render esté usando el commit más reciente.
+2. Ejecuta **Manual Deploy → Deploy latest commit**.
+3. Revisa que los logs muestren `Bot conectado como ...`.
+4. Ejecuta el comando de Discord de nuevo en lugar de reutilizar una interacción vieja.
+
 ## 16. Seguridad
 
 Nunca publiques:
