@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: x23-hub
+    runtime: node
+    plan: free
+    buildCommand: corepack enable && corepack prepare pnpm@10.26.1 --activate && pnpm install --frozen-lockfile && pnpm run build:production
+    startCommand: node artifacts/api-server/prod-launcher.mjs
+    healthCheckPath: /api/healthz
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: BOT_SECRET
+        sync: false
+      - key: DISCORD_BOT_TOKEN
+        sync: false
+      - key: DISCORD_CLIENT_ID
+        sync: false
+      - key: GUILD_ID
+        sync: false
+      - key: ADMIN_PANEL_PASSWORD
+        sync: false
