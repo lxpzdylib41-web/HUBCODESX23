@@ -25,9 +25,13 @@ function isValidPassword(value: unknown) {
   return actual.length === expected.length && timingSafeEqual(actual, expected);
 }
 
-function requireAdmin(req: Request, res: Response, next: NextFunction) {
+export function isAdminSession(req: Request): boolean {
   const session = cookies(req)[COOKIE];
-  if (!session || !sessions.has(session)) {
+  return Boolean(session && sessions.has(session));
+}
+
+function requireAdmin(req: Request, res: Response, next: NextFunction) {
+  if (!isAdminSession(req)) {
     res.status(401).json({ ok: false, message: "Sesión administrativa requerida." });
     return;
   }

@@ -2,12 +2,20 @@ import { Router, type IRouter } from "express";
 import { eq, desc, isNotNull, isNull, and, ilike, count, sql } from "drizzle-orm";
 import { db, keysTable } from "@workspace/db";
 import { logger } from "../lib/logger";
+import { isAdminSession } from "./admin.js";
+import type { Request, Response, NextFunction } from "express";
 
 const router: IRouter = Router();
 
-function botAuth(req: any, res: any, next: any) {
+function botAuth(req: Request, res: Response, next: NextFunction) {
   const secret = process.env.BOT_SECRET;
-  if (!secret || req.headers["x-bot-secret"] !== secret) {
+  const headerSecret = req.headers["x-bot-secret"];
+  const validBotSecret = Boolean(secret && typeof headerSecret === "string" && headerSecret === secret);
+
+  // Permite administrar keys desde el panel web después del login,
+  // sin exponer BOT_SECRET al navegador. El bot de Discord sigue
+  // usando x-bot-secret como antes.
+  if (!validBotSecret && !isAdminSession(req)) {
     res.status(401).json({ error: "No autorizado" });
     return;
   }
